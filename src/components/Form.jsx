@@ -6,6 +6,7 @@ const Form = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     setTitle("");
+    setContent("");
   };
   return (
     <form onSubmit={onSubmit}>
@@ -24,6 +25,7 @@ const Form = () => {
         placeholder="내용을 입력해주세요"
         id="content"
       />
+      <button>등록</button>
     </form>
   );
 };
