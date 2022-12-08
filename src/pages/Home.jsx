@@ -1,25 +1,16 @@
-import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import Form from "../components/Form";
-import Header from "../components/Header";
 import List from "../components/List";
 
 const Home = () => {
+  const navigation = useNavigate();
   return (
-    <HomeMain>
-      <Header />
+    <>
+      <button onClick={() => navigation("/login")}>로그인</button>
       <Form />
       <List />
-    </HomeMain>
+    </>
   );
 };
 
 export default Home;
-
-const HomeMain = styled.main`
-  max-width: 600px;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: auto;
-`;

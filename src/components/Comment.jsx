@@ -1,31 +1,13 @@
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Comment = () => {
-  const [text, setText] = useState("안녕하세요");
-  const [isOpen, setIsOpen] = useState(true);
-  const onDelete = () => {};
-  const onUpdate = () => {};
+  const navigation = useNavigate();
+
   return (
-    <CommentContainer>
-      <p>id : 32</p>
-      {isOpen ? (
-        <label htmlFor="comment">내용 : 안녕하세요 </label>
-      ) : (
-        <input
-          type="text"
-          id="comment"
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-        />
-      )}
-      <div>
-        <button onClick={onDelete}>삭제하기</button>
-        <button onClick={() => setIsOpen((prev) => !prev)}>
-          {isOpen ? "수정하기" : "수정취소"}
-        </button>
-        {!isOpen && <button onClick={onUpdate}>수정 완료</button>}
-      </div>
+    <CommentContainer onClick={() => navigation("/list/3")}>
+      <span>title : 안녕하세요</span>
+      <span>nickName : charley</span>
     </CommentContainer>
   );
 };

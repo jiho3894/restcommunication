@@ -4,6 +4,15 @@ const List = () => {
   return (
     <ul>
       <Comment />
+      <Comment />
+      <Comment />
+      <Comment />
+      <Comment />
+      <Comment />
+      <Comment />
+      <Comment />
+      <Comment />
+      <Comment />
     </ul>
   );
 };
