@@ -1,13 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-const Comment = () => {
+const Comment = ({ id, title, nickname }) => {
   const navigation = useNavigate();
 
   return (
-    <CommentContainer onClick={() => navigation("/list/3")}>
-      <span>title : 안녕하세요</span>
-      <span>nickName : charley</span>
+    <CommentContainer onClick={() => navigation(`/list/${id}`)}>
+      <span>title : {title}</span>
+      <span>nickname : {nickname}</span>
     </CommentContainer>
   );
 };

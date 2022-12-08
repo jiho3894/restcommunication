@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [nickName, setNickName] = useState("");
+  const [nickname, setNickName] = useState("");
   const [password, setPassword] = useState("");
   const navigation = useNavigate();
   const onSubmit = (e) => {
@@ -15,7 +15,7 @@ const Login = () => {
         <input
           type="text"
           id="nickname"
-          value={nickName}
+          value={nickname}
           onChange={(e) => setNickName(e.target.value)}
         />
         <label htmlFor="password">password : </label>
