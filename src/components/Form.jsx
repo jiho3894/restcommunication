@@ -1,10 +1,15 @@
 import { useState } from "react";
+import { postTodo } from "../core/api/list/queries";
 
 const Form = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const onSubmit = (e) => {
     e.preventDefault();
+    postTodo({
+      title,
+      content,
+    });
     setTitle("");
     setContent("");
   };

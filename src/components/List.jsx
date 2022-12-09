@@ -1,10 +1,26 @@
+import { useEffect, useState } from "react";
+import { getTodo } from "../core/api/list/queries";
 import Comment from "./Comment";
 
 const List = () => {
+  const [list, setList] = useState();
+  useEffect(() => {
+    getTodo().then((res) => setList(res));
+  }, []);
   return (
     <ul>
-      <Comment id="1" title="안녕하세요" nickname="charley" />
-      <Comment id="2" title="반가워요" nickname="jiho" />
+      {list === undefined
+        ? "Loading..."
+        : list.postList.map((todo) => {
+            return (
+              <Comment
+                key={todo.id}
+                id={todo.id}
+                title={todo.title}
+                nickname={todo.nickname}
+              />
+            );
+          })}
     </ul>
   );
 };

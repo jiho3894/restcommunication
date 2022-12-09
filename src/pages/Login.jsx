@@ -1,12 +1,17 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { postLogin } from "../core/api/login/queries";
+import { useInput } from "../core/utils/useInput";
 
 const Login = () => {
-  const [nickname, setNickName] = useState("");
-  const [password, setPassword] = useState("");
+  const [nickname, setNickName] = useInput();
+  const [password, setPassword] = useInput();
   const navigation = useNavigate();
   const onSubmit = (e) => {
     e.preventDefault();
+    postLogin({
+      nickname,
+      password,
+    }).then((res) => localStorage.setItem("id", res.headers.authorization));
   };
   return (
     <>
@@ -16,14 +21,15 @@ const Login = () => {
           type="text"
           id="nickname"
           value={nickname}
-          onChange={(e) => setNickName(e.target.value)}
+          onChange={setNickName}
         />
         <label htmlFor="password">password : </label>
         <input
           type="password"
           id="password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={setPassword}
+          autoComplete="off"
         />
         <button>로그인</button>
       </form>

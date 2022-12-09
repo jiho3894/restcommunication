@@ -1,26 +1,43 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
+import {
+  deleteTodo,
+  getDetailTodo,
+  updateTodo,
+} from "../core/api/list/queries";
 
 const Detail = () => {
   const navigation = useNavigate();
-  const [text, setText] = useState("안녕하세요");
+  const { id } = useParams();
+  const [content, setContent] = useState("안녕하세요");
   const [isOpen, setIsOpen] = useState(true);
-  const onDelete = () => {};
-  const onUpdate = () => {};
+  const [detail, setDetail] = useState();
+  const onDelete = () => {
+    deleteTodo(id);
+  };
+  const onUpdate = () => {
+    updateTodo(id, {
+      title: "안녕하세요",
+      content,
+    });
+  };
+  useEffect(() => {
+    getDetailTodo(id).then((res) => setDetail(res));
+  }, [id]);
   return (
     <CommentContainer>
       <button onClick={() => navigation(-1)}>이전 페이지</button>
-      <p>title : 안녕하세요</p>
-      <p>nickName : Charley</p>
+      <p>title : {detail?.title}</p>
+      <p>nickName : {detail?.nickname}</p>
       {isOpen ? (
-        <label htmlFor="comment">content : 반갑습니다 charley입니다</label>
+        <label htmlFor="comment">content : {detail?.content}</label>
       ) : (
         <input
           type="text"
           id="comment"
-          value={text}
-          onChange={(e) => setText(e.target.value)}
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
         />
       )}
       <div>
