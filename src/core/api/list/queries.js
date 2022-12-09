@@ -3,7 +3,7 @@ import { baseURL, instance } from "../axios";
 
 export const getTodo = async () => {
   try {
-    const { data } = await instance.get("/api/posts/");
+    const { data } = await instance.get("/api/posts");
     return data;
   } catch (error) {
     useSweet(1000, "error", error.response.data.msg);
