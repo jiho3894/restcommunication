@@ -1,5 +1,5 @@
 import { useSweet } from "../../utils/useSweet";
-import { instance } from "../axios";
+import { baseURL, instance } from "../axios";
 
 export const getTodo = async () => {
   try {
@@ -21,7 +21,7 @@ export const getDetailTodo = async (id) => {
 
 export const postTodo = async (post) => {
   try {
-    const data = await instance.post(`/api/posts`, post);
+    const data = await baseURL.post(`/api/posts`, post);
     console.log(data);
     return data;
   } catch (error) {
@@ -31,7 +31,7 @@ export const postTodo = async (post) => {
 
 export const updateTodo = async (id, post) => {
   try {
-    const data = instance.put(`/api/posts/${id}`, post);
+    const data = await baseURL.put(`/api/posts/${id}`, post);
     return data;
   } catch (error) {
     useSweet(1000, "error", error.response.data.msg);
@@ -40,7 +40,7 @@ export const updateTodo = async (id, post) => {
 
 export const deleteTodo = async (id) => {
   try {
-    const data = instance.delete(`/api/posts/${id}`);
+    const data = await baseURL.delete(`/api/posts/${id}`);
     return data;
   } catch (error) {
     useSweet(1000, "error", error.response.data.msg);
