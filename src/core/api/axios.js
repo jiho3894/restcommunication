@@ -11,6 +11,6 @@ export const baseURL = axios.create({
 baseURL.interceptors.request.use((config) => {
   if (config.headers === undefined) return;
   const token = localStorage.getItem("id");
-  config.headers["authorization"] = `Bearer ${token}`;
+  config.headers["Authorization"] = `Bearer ${token}`;
   return config;
 });
