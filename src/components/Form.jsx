@@ -1,18 +1,14 @@
 import { useState } from "react";
-import { postTodo } from "../core/api/list/queries";
-import { useSweet } from "../core/utils/useSweet";
+import { useDispatch } from "react-redux";
+import { __postTodos } from "../redux/modules/todo";
 
 const Form = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const dispatch = useDispatch();
   const onSubmit = (e) => {
     e.preventDefault();
-    postTodo({
-      title,
-      content,
-    })
-      .then(() => useSweet(1000, "success", "게시글 작성 완료"))
-      .catch((error) => useSweet(1000, "error", error.response.data.msg));
+    dispatch(__postTodos({ postList: { title, content } }));
     setTitle("");
     setContent("");
   };

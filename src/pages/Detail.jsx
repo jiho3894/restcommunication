@@ -1,43 +1,41 @@
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
-import {
-  deleteTodo,
-  getDetailTodo,
-  updateTodo,
-} from "../core/api/list/queries";
-import { useSweet } from "../core/utils/useSweet";
+import { __getTodoDetail, __updateTodoDetail } from "../redux/modules/detail";
+import { __deleteTodoDetail } from "../redux/modules/todo";
 
 const Detail = () => {
   const navigation = useNavigate();
   const { id } = useParams();
+  const dispatch = useDispatch();
+  const { todos } = useSelector((state) => state.detail);
   const [content, setContent] = useState("");
   const [isOpen, setIsOpen] = useState(true);
-  const [detail, setDetail] = useState();
   const onDelete = () => {
-    deleteTodo(id)
-      .then(() => useSweet(1000, "success", "게시글 삭제 완료"))
-      .catch((error) => useSweet(1000, "error", error.response.data.msg));
+    dispatch(__deleteTodoDetail(id));
+    navigation(-1);
   };
   const onUpdate = () => {
-    updateTodo(id, {
-      title: detail?.title,
-      content: content,
-    })
-      .then(() => useSweet(1000, "success", "게시글 수정 완료"))
-      .catch((error) => useSweet(1000, "error", error.response.data.msg));
+    dispatch(
+      __updateTodoDetail({
+        id,
+        title: todos?.title,
+        content,
+      })
+    );
     setIsOpen(!isOpen);
   };
   useEffect(() => {
-    getDetailTodo(id).then((res) => setDetail(res));
-  }, [id, isOpen]);
+    dispatch(__getTodoDetail(id));
+  }, [id]);
   return (
     <CommentContainer>
       <button onClick={() => navigation(-1)}>이전 페이지</button>
-      <p>title : {detail?.title}</p>
-      <p>nickName : {detail?.nickname}</p>
+      <p>title : {todos?.title}</p>
+      <p>nickName : {todos?.nickname}</p>
       {isOpen ? (
-        <label htmlFor="comment">content : {detail?.content}</label>
+        <label htmlFor="comment">content : {todos?.content}</label>
       ) : (
         <input
           type="text"

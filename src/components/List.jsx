@@ -1,17 +1,19 @@
-import { useEffect, useState } from "react";
-import { getTodo } from "../core/api/list/queries";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { __getTodos } from "../redux/modules/todo";
 import Comment from "./Comment";
 
 const List = () => {
-  const [list, setList] = useState();
+  const dispatch = useDispatch();
+  const { todos, isLoading } = useSelector((state) => state.todos);
   useEffect(() => {
-    getTodo().then((res) => setList(res));
+    dispatch(__getTodos());
   }, []);
   return (
     <ul>
-      {list === undefined
+      {isLoading
         ? "Loading..."
-        : list.postList.map((todo) => {
+        : todos.postList?.map((todo) => {
             return (
               <Comment
                 key={todo.id}
