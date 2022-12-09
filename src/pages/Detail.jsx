@@ -6,25 +6,31 @@ import {
   getDetailTodo,
   updateTodo,
 } from "../core/api/list/queries";
+import { useSweet } from "../core/utils/useSweet";
 
 const Detail = () => {
   const navigation = useNavigate();
   const { id } = useParams();
-  const [content, setContent] = useState("안녕하세요");
+  const [content, setContent] = useState("");
   const [isOpen, setIsOpen] = useState(true);
   const [detail, setDetail] = useState();
   const onDelete = () => {
-    deleteTodo(id);
+    deleteTodo(id)
+      .then(() => useSweet(1000, "success", "게시글 삭제 완료"))
+      .catch((error) => useSweet(1000, "error", error.response.data.msg));
   };
   const onUpdate = () => {
     updateTodo(id, {
-      title: "안녕하세요",
-      content,
-    });
+      title: detail?.title,
+      content: content,
+    })
+      .then(() => useSweet(1000, "success", "게시글 수정 완료"))
+      .catch((error) => useSweet(1000, "error", error.response.data.msg));
+    setIsOpen(!isOpen);
   };
   useEffect(() => {
     getDetailTodo(id).then((res) => setDetail(res));
-  }, [id]);
+  }, [id, isOpen]);
   return (
     <CommentContainer>
       <button onClick={() => navigation(-1)}>이전 페이지</button>

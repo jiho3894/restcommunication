@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { postTodo } from "../core/api/list/queries";
+import { useSweet } from "../core/utils/useSweet";
 
 const Form = () => {
   const [title, setTitle] = useState("");
@@ -9,7 +10,9 @@ const Form = () => {
     postTodo({
       title,
       content,
-    });
+    })
+      .then(() => useSweet(1000, "success", "게시글 작성 완료"))
+      .catch((error) => useSweet(1000, "error", error.response.data.msg));
     setTitle("");
     setContent("");
   };

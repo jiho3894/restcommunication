@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { postLogin } from "../core/api/login/queries";
 import { useInput } from "../core/utils/useInput";
+import { useSweet } from "../core/utils/useSweet";
 
 const Login = () => {
   const [nickname, setNickName] = useInput();
@@ -11,7 +12,11 @@ const Login = () => {
     postLogin({
       nickname,
       password,
-    }).then((res) => localStorage.setItem("id", res.headers.authorization));
+    }).then((res) => {
+      useSweet(1000, "success", "로그인 성공");
+      localStorage.setItem("id", res.headers.authorization);
+      navigation("/");
+    });
   };
   return (
     <>
