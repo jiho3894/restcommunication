@@ -12,11 +12,13 @@ const Signup = () => {
     postSignup({
       nickname,
       password,
-    }).then((res) => {
-      useSweet(1000, "success", "회원가입 성공");
-      localStorage.setItem("id", res.headers.authorization);
-      navigation("/login");
-    });
+    })
+      .then((res) => {
+        useSweet(1000, "success", "회원가입 성공");
+        localStorage.setItem("id", res.headers.authorization);
+        navigation("/login");
+      })
+      .catch((error) => useSweet(1000, "error", error.response.data.msg));
   };
   return (
     <>

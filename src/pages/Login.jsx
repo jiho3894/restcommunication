@@ -12,11 +12,13 @@ const Login = () => {
     postLogin({
       nickname,
       password,
-    }).then((res) => {
-      useSweet(1000, "success", "로그인 성공");
-      localStorage.setItem("id", res.headers.authorization);
-      navigation("/");
-    });
+    })
+      .then((res) => {
+        useSweet(1000, "success", "로그인 성공");
+        localStorage.setItem("id", res.headers.authorization);
+        navigation("/");
+      })
+      .catch((error) => useSweet(1000, "error", error.response.data.msg));
   };
   return (
     <>
