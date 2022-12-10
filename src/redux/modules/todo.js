@@ -56,7 +56,7 @@ const todoSlice = createSlice({
       state.error = action.payload;
     });
     builder.addCase(__postTodos.fulfilled, (state, action) => {
-      state.todos.postList.push(action.meta.arg.postList);
+      state.todos.postList.push(action.payload);
     });
     builder.addCase(__deleteTodoDetail.fulfilled, (state, action) => {
       state.todos = {
