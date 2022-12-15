@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { postSignup } from "../core/api/login/queries";
 import { useInput } from "../core/utils/useInput";
-import { useSweet } from "../core/utils/useSweet";
 
 const Signup = () => {
   const [nickname, setNickName] = useInput();
@@ -12,13 +11,10 @@ const Signup = () => {
     postSignup({
       nickname,
       password,
-    })
-      .then((res) => {
-        useSweet(1000, "success", "회원가입 성공");
-        localStorage.setItem("id", res.headers.authorization);
-        navigation("/login");
-      })
-      .catch((error) => useSweet(1000, "error", error.response.data.msg));
+    }).then((res) => {
+      localStorage.setItem("id", res.headers.authorization);
+      navigation("/login");
+    });
   };
   return (
     <>

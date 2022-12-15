@@ -23,7 +23,7 @@ const Form = () => {
         id="title"
       />
       <label htmlFor="content">내용 : </label>
-      <textarea
+      <input
         value={content}
         onChange={(e) => setContent(e.target.value)}
         placeholder="내용을 입력해주세요"
