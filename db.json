@@ -1,19 +1,15 @@
 {
-  "posts": [
+  "postsa": [
     {
       "id": 1,
       "title": "json-server",
-      "author": "typicode"
-    }
-  ],
-  "comments": [
+      "content": "typicode",
+      "nickname": "charley"
+    },
     {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "id": 1671190868094,
+      "title": "sf",
+      "content": "sdffsd"
     }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  ]
 }
