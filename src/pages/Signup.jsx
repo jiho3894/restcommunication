@@ -6,6 +6,7 @@ const Signup = () => {
   const [nickname, setNickName] = useInput();
   const [password, setPassword] = useInput();
   const navigation = useNavigate();
+
   const onSubmit = (e) => {
     e.preventDefault();
     postSignup({
@@ -16,6 +17,7 @@ const Signup = () => {
       navigation("/login");
     });
   };
+
   return (
     <>
       <form onSubmit={onSubmit}>

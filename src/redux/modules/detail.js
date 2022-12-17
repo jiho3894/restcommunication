@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { baseURL, instance } from "../../core/api/axios";
 
 const initialState = {
-  todos: {},
+  todos: [],
   isLoading: false,
 };
 

@@ -7,6 +7,7 @@ const Login = () => {
   const [nickname, setNickName] = useInput();
   const [password, setPassword] = useInput();
   const navigation = useNavigate();
+
   const onSubmit = (e) => {
     e.preventDefault();
     postLogin({
@@ -20,6 +21,7 @@ const Login = () => {
       })
       .catch((error) => useSweet(1000, "error", error.response.data.msg));
   };
+
   return (
     <>
       <form onSubmit={onSubmit}>

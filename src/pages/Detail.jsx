@@ -6,16 +6,18 @@ import { __getTodoDetail, __updateTodoDetail } from "../redux/modules/detail";
 import { __deleteTodoDetail } from "../redux/modules/todo";
 
 const Detail = () => {
-  const navigation = useNavigate();
-  const { id } = useParams();
-  const dispatch = useDispatch();
-  const { todos } = useSelector((state) => state.detail);
   const [content, setContent] = useState("");
   const [isOpen, setIsOpen] = useState(true);
+  const { id } = useParams();
+  const navigation = useNavigate();
+  const dispatch = useDispatch();
+  const { todos } = useSelector((state) => state.detail);
+
   const onDelete = () => {
     dispatch(__deleteTodoDetail(id));
     navigation(-1);
   };
+
   const onUpdate = () => {
     dispatch(
       __updateTodoDetail({
@@ -26,9 +28,11 @@ const Detail = () => {
     );
     setIsOpen(!isOpen);
   };
+
   useEffect(() => {
     dispatch(__getTodoDetail(id));
   }, [id]);
+
   return (
     <CommentContainer>
       <button onClick={() => navigation(-1)}>이전 페이지</button>

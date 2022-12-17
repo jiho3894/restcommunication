@@ -6,12 +6,14 @@ const Form = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const dispatch = useDispatch();
+
   const onSubmit = (e) => {
     e.preventDefault();
     dispatch(__postTodos({ postList: { title, content } }));
     setTitle("");
     setContent("");
   };
+
   return (
     <form onSubmit={onSubmit}>
       <label htmlFor="title">제목 : </label>

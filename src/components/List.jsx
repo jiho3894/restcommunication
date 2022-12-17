@@ -6,9 +6,11 @@ import Comment from "./Comment";
 const List = () => {
   const dispatch = useDispatch();
   const { todos, isLoading } = useSelector((state) => state.todos);
+
   useEffect(() => {
     dispatch(__getTodos());
   }, []);
+
   return (
     <ul>
       {isLoading
