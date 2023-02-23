@@ -6,7 +6,7 @@ import Comment from "./Comment";
 const List = () => {
   const dispatch = useDispatch();
   const { todos, isLoading } = useSelector((state) => state.todos);
-
+  console.log(todos, isLoading);
   useEffect(() => {
     dispatch(__getTodos());
   }, []);
@@ -15,7 +15,8 @@ const List = () => {
     <ul>
       {isLoading
         ? "Loading..."
-        : todos.postList?.map((todo) => {
+        : todos?.map((todo) => {
+            console.log(todo);
             return (
               <Comment
                 key={todo.id}

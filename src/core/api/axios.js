@@ -1,14 +1,14 @@
 import axios from "axios";
 
 export const instance = axios.create({
-  baseURL: "http://13.124.28.246",
+  baseURL: "http://13.124.236.248",
   headers: {
     "Access-Control-Allow-Origin": "*",
   },
 });
 
 export const baseURL = axios.create({
-  baseURL: "http://13.124.28.246",
+  baseURL: "http://13.124.236.248",
   headers: {
     "Access-Control-Allow-Origin": "*",
   },

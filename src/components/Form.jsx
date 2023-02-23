@@ -9,7 +9,7 @@ const Form = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    dispatch(__postTodos({ postList: { title, content } }));
+    dispatch(__postTodos({ title, content }));
     setTitle("");
     setContent("");
   };

@@ -10,7 +10,7 @@ export const __getTodoDetail = createAsyncThunk(
   "getTodoDetail",
   async (payload, thunkAPI) => {
     try {
-      const { data } = await instance.get(`/api/posts/${payload}`);
+      const { data } = await instance.get(`/posts/${payload}`);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -26,7 +26,7 @@ export const __updateTodoDetail = createAsyncThunk(
         title: payload.title,
         content: payload.content,
       };
-      await baseURL.put(`/api/posts/${payload.id}`, obj);
+      await baseURL.put(`/posts/${payload.id}`, obj);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }

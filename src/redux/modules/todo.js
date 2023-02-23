@@ -2,15 +2,13 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { baseURL, instance } from "../../core/api/axios";
 
 const initialState = {
-  todos: {
-    postList: [],
-  },
+  todos: [],
   isLoading: false,
 };
 
 export const __getTodos = createAsyncThunk("getTodos", async (_, thunkAPI) => {
   try {
-    const { data } = await instance.get("/api/posts");
+    const { data } = await instance.get("/posts");
     return data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error);
@@ -21,7 +19,7 @@ export const __postTodos = createAsyncThunk(
   "postTodos",
   async (payload, thunkAPI) => {
     try {
-      const { data } = await baseURL.post(`/api/posts`, payload.postList);
+      const { data } = await baseURL.post(`/posts`, payload);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -33,7 +31,7 @@ export const __deleteTodoDetail = createAsyncThunk(
   "deleteTodoDetail",
   async (payload, thunkAPI) => {
     try {
-      await baseURL.delete(`/api/posts/${payload}`);
+      await baseURL.delete(`/posts/${payload}`);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -56,14 +54,10 @@ const todoSlice = createSlice({
       state.error = action.payload;
     });
     builder.addCase(__postTodos.fulfilled, (state, action) => {
-      state.todos.postList.push(action.payload);
+      state.todos.push(action.payload);
     });
     builder.addCase(__deleteTodoDetail.fulfilled, (state, action) => {
-      state.todos = {
-        postList: state.todos.postList.filter(
-          (x) => x.id !== Number(action.meta.arg)
-        ),
-      };
+      state.todos.filter((x) => x.id !== Number(action.meta.arg));
     });
   },
 });

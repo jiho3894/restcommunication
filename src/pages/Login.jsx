@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { useNavigate } from "react-router-dom";
 import { postLogin } from "../core/api/login/queries";
 import { useInput } from "../core/utils/useInput";
