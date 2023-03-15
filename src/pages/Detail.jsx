@@ -31,7 +31,7 @@ const Detail = () => {
 
   useEffect(() => {
     dispatch(__getTodoDetail(id));
-  }, [id]);
+  }, [dispatch, id]);
 
   return (
     <CommentContainer>
