@@ -1,14 +1,14 @@
 import axios from "axios";
 
 export const instance = axios.create({
-  baseURL: process.env.REACT_APP_URL,
+  baseURL: `http://${process.env.REACT_APP_URL}`,
   headers: {
     "Access-Control-Allow-Origin": "*",
   },
 });
 
 export const baseURL = axios.create({
-  baseURL: process.env.REACT_APP_URL,
+  baseURL: `http://${process.env.REACT_APP_URL}`,
   headers: {
     "Access-Control-Allow-Origin": "*",
   },

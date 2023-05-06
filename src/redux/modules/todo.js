@@ -57,7 +57,9 @@ const todoSlice = createSlice({
       state.todos.push(action.payload);
     });
     builder.addCase(__deleteTodoDetail.fulfilled, (state, action) => {
-      state.todos.filter((x) => x.id !== Number(action.meta.arg));
+      return {
+        todos: state.todos.filter((x) => x.id !== Number(action.meta.arg))
+      }
     });
   },
 });

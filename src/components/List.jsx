@@ -9,7 +9,7 @@ const List = () => {
   console.log(todos, isLoading);
   useEffect(() => {
     dispatch(__getTodos());
-  }, []);
+  }, [dispatch]);
 
   return (
     <ul>
